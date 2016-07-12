@@ -1,0 +1,45 @@
+[State]
+Type=Enum
+Items=Global Enabled;Opt-In;Disabled
+Category=Options
+CategoryOrder=0
+Index=0
+Label=State
+Default=Global Enabled
+Description=How this event plug-in should respond to events. If Global, all jobs and slaves will trigger the events for this plugin. If Opt-In, jobs and slaves can choose to trigger the events for this plugin. If Disabled, no events are triggered for this plugin.
+
+[FFmpegExe]
+Type=Filename
+Label=FFmpeg Exe File
+Category=Options
+CategoryOrder=1
+Index=0
+Default=/usr/local/FFmpeg/ffmpeg
+Description=ffmpeg executable location to be used.
+
+[AudioFile]
+Type=Filename
+Label=Audio File
+Category=Options
+CategoryOrder=1
+Index=1
+Default=/efs/c.mp3
+Description=ffmpeg audio file to be used.
+
+[OutputFolder]
+Type=string
+Category=Options
+CategoryOrder=1
+Index=2
+Label=FFmpeg Output Folder
+Default=FFmpeg
+Description=The folder in which to put the FFmpeg output, relative to the FFmpeg input folder. Leave BLANK to output into same directory as input footage.
+
+[URL]
+Type=string
+Category=Options
+CategoryOrder=1
+Index=3
+Label=URL
+Default=
+Description=URL for updating status of ffmpeg job.
