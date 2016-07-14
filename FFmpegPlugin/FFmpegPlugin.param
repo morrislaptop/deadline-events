@@ -14,7 +14,7 @@ Label=FFmpeg Exe File
 Category=Options
 CategoryOrder=1
 Index=0
-Default=/usr/local/FFmpeg/ffmpeg
+Default=/usr/bin/ffmpeg
 Description=ffmpeg executable location to be used.
 
 [AudioFile]

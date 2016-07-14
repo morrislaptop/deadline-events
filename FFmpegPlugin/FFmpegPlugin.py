@@ -85,7 +85,7 @@ class FFmpegEventListener (DeadlineEventListener):
                     args += "\"" + ffmpegOutputFile + "\""
 
                     # execute ffmpeg
-                    FFmpegExe = self.GetConfigEntryWithDefault( "FFmpegExe", "/usr/local/FFmpeg/ffmpeg" )
+                    FFmpegExe = self.GetConfigEntryWithDefault( "FFmpegExe", "/usr/bin/ffmpeg" )
 
                     process = ProcessUtils.SpawnProcess( FFmpegExe, args )
                     ProcessUtils.WaitForExit( process, -1 )
