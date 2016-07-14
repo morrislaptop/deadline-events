@@ -52,7 +52,7 @@ class FFmpegEventListener (DeadlineEventListener):
                     jobInputFile = RepositoryUtils.CheckPathMapping( jobInputFile, True )
                     jobInputFile = PathUtils.ToPlatformIndependentPath( jobInputFile )
                     ClientUtils.LogText( "#########################################################################################" )
-                    ClientUtils.LogText( "Script v10" )
+                    ClientUtils.LogText( "Script v11" )
                     ClientUtils.LogText( "FFmpeg Input Img Seq: %s" % jobInputFile )
 
                     ffmpegAudioFile = self.GetConfigEntryWithDefault( "AudioFile", "/etc/c.mp3" )
@@ -93,8 +93,6 @@ class FFmpegEventListener (DeadlineEventListener):
                     if( process.ExitCode == 0 ):
                         ClientUtils.LogText( "Successfully created FFmpeg movie: %s" % ffmpegOutputFile )
                         
-                        job.ffmpegOutputFileProperty = ffmpegOutputFile
-                        job["ffmpegOutputFileAttr"] = ffmpegOutputFile
                         job.SetJobExtraInfoKeyValue("Movie", ffmpegOutputFile)
                         jsonJobObject = JsonConvert.SerializeObject( job )
 
