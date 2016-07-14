@@ -52,7 +52,7 @@ class FFmpegEventListener (DeadlineEventListener):
                     jobInputFile = RepositoryUtils.CheckPathMapping( jobInputFile, True )
                     jobInputFile = PathUtils.ToPlatformIndependentPath( jobInputFile )
                     ClientUtils.LogText( "#########################################################################################" )
-                    ClientUtils.LogText( "Script v11" )
+                    ClientUtils.LogText( "Script v12" )
                     ClientUtils.LogText( "FFmpeg Input Img Seq: %s" % jobInputFile )
 
                     ffmpegAudioFile = self.GetConfigEntryWithDefault( "AudioFile", "/etc/c.mp3" )
