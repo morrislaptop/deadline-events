@@ -52,7 +52,7 @@ class FFmpegEventListener (DeadlineEventListener):
                     jobInputFile = RepositoryUtils.CheckPathMapping( jobInputFile, True )
                     jobInputFile = PathUtils.ToPlatformIndependentPath( jobInputFile )
                     ClientUtils.LogText( "#########################################################################################" )
-                    ClientUtils.LogText( "Script v6" )
+                    ClientUtils.LogText( "Script v10" )
                     ClientUtils.LogText( "FFmpeg Input Img Seq: %s" % jobInputFile )
 
                     ffmpegAudioFile = self.GetConfigEntryWithDefault( "AudioFile", "/etc/c.mp3" )
@@ -93,6 +93,9 @@ class FFmpegEventListener (DeadlineEventListener):
                     if( process.ExitCode == 0 ):
                         ClientUtils.LogText( "Successfully created FFmpeg movie: %s" % ffmpegOutputFile )
                         
+                        job.ffmpegOutputFileProperty = ffmpegOutputFile
+                        job["ffmpegOutputFileAttr"] = ffmpegOutputFile
+                        job.SetJobExtraInfoKeyValue("Movie", ffmpegOutputFile)
                         jsonJobObject = JsonConvert.SerializeObject( job )
 
                         # url = self.GetConfigEntryWithDefault( "URL", "" )
@@ -104,7 +107,7 @@ class FFmpegEventListener (DeadlineEventListener):
                         ClientUtils.LogText( "#########################################################################################" )
 
                         # Send signal to web server here
-                        req = urllib2.Request( url, json.dumps(jsonJobObject), {"Content-Type": "application/json"} )
+                        req = urllib2.Request( url, jsonJobObject, {"Content-Type": "application/json"} )
                         response = urllib2.urlopen( req )
 
                         ClientUtils.LogText( "response: %s" % response.read() )
