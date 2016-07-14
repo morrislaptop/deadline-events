@@ -7,6 +7,7 @@ from Deadline.Scripting import *
 
 import sys
 import os
+import json
 import traceback
 import urllib
 import urllib2
@@ -51,6 +52,7 @@ class FFmpegEventListener (DeadlineEventListener):
                     jobInputFile = RepositoryUtils.CheckPathMapping( jobInputFile, True )
                     jobInputFile = PathUtils.ToPlatformIndependentPath( jobInputFile )
                     ClientUtils.LogText( "#########################################################################################" )
+                    ClientUtils.LogText( "Script v4" )
                     ClientUtils.LogText( "FFmpeg Input Img Seq: %s" % jobInputFile )
 
                     ffmpegAudioFile = self.GetConfigEntryWithDefault( "AudioFile", "/etc/c.mp3" )
@@ -94,15 +96,17 @@ class FFmpegEventListener (DeadlineEventListener):
                         jsonJobObject = JsonConvert.SerializeObject( job )
 
                         url = self.GetConfigEntryWithDefault( "URL", "" )
-                        
+                        jobUrl = job.GetJobExtraInfoKeyValueWithDefault("CallbackURL", url)                        
+
                         ClientUtils.LogText( "#########################################################################################" )
                         ClientUtils.LogText( "url: %s" % url )
+                        ClientUtils.LogText( "job url: %s" % jobUrl )
                         ClientUtils.LogText( "json object: %s" % jsonJobObject )
                         ClientUtils.LogText( "#########################################################################################" )
 
                         # Send signal to web server here
-                        data = urllib.urlencode( jsonJobObject )
-                        req = urllib2.Request( url, data )
+                        # data = urllib.urlencode( jsonJobObject )
+                        req = urllib2.Request( jobUrl, json.dumps(jsonJobObject), {'Content-Type': 'application/json'} )
                         response = urllib2.urlopen( req )
 
                         ClientUtils.LogText( "response: %s" % response.read() )
